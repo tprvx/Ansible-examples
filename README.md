@@ -10,6 +10,11 @@
 ### Ad-hoc command
 ##### ansible all -m ping
 ##### ansible all -m shell 'echo "All is file" > /tmp/text.txt'
-##### ansible-playbook playbook.yaml
+##### ansible all -m setup
+##### ansible-vault encrypt palybook.yaml
+##### ansible-playbook playbook.yaml --aks-vault-pass
+##### ansible-playbook playbook.yaml --syntax-check
+##### ansible-galaxy init nginx-role
 ##### ansible-doc apt
+##### !password к зашированному файлу: qwerty
 

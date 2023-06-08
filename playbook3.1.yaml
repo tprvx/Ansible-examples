@@ -1,0 +1,14 @@
+---
+- name: Apache server
+  hosts: all
+  become: yes
+  gather_facts: true
+  pre_tasks:
+  - name: Stop nginx service
+    service:
+      name: nginx
+      state: stopped
+      enabled: no
+  roles:
+    - install-apache
+...

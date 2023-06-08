@@ -1,0 +1,31 @@
+---
+# tasks file for install-apache
+- name: Install apt package
+  apt:
+    name: apache2
+    state: latest
+  when: os_family == "Debian"
+
+- name: Install yum package
+  yum:
+    name: apache2
+    state: latest
+  when: os_family == "RedHat"
+
+- name: Wait for open 80-port
+  wait_for:
+    port: 80
+    delay: 1
+  notify:
+    - Show endpoints
+
+- name: Add Index page
+  template:
+    src: "index.html.j2"
+    dest: "/var/www/html/index.html"
+    owner: root
+    group: root
+    mode: 0755
+  notify:
+    - Reload apache2
+...

@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: true
+  tasks:
+  - name: Download archive
+    get_url:
+      url: https://github.com/ansible/ansible/archive/refs/heads/devel.zip
+      dest: /home/{{ ansible_facts['hostname'] }}/Downloads/my-archive.zip
+      mode: 0777
+  - name: Create directory
+    file:
+      path: /home/{{ ansible_facts['hostname'] }}/Documents/my-archive
+      state: directory
+  - name: Unpack archive
+    unarchive:
+      remote_src: yes
+      src: /home/{{ ansible_facts['hostname'] }}/Downloads/my-archive.zip
+      dest: /home/{{ ansible_facts['hostname'] }}/Documents/my-archive
+...

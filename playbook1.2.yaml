@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: false
+  tasks:
+  - name: Install package
+    apt:
+      name: tuned
+      state: latest
+    notify:
+      - Start tuned service
+
+  handlers:
+  - name: Start tuned service
+    service:
+      name: tuned
+      state: started
+      # for autostart service after boot system
+      enabled: true
+...

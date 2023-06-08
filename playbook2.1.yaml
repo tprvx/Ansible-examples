@@ -1,0 +1,25 @@
+---
+- hosts: all
+  gather_facts: true
+  vars:
+    file_name: 00-good-day
+    file_path: /etc/update-motd.d/{{ file_name }}
+    welcome_text: |
+      #!/bin/sh
+      echo "*** Have a nice day! ***"
+      echo "Hostname: {{ ansible_facts['hostname'] }}"
+      echo "IP: {{ ansible_facts.all_ipv4_addresses[0] }}"
+  tasks:
+  # - name: Remove
+  #   shell: "rm {{ file_path }}"
+  - name: Create new motd element
+    become: yes
+    file:
+      path: "{{ file_path }}"
+      mode: 0755
+      state: touch
+  - name: Edit new motd
+    lineinfile:
+      path: "{{ file_path }}"
+      line: "{{ welcome_text }}"
+...
