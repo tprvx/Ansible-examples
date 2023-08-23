@@ -1,0 +1,11 @@
+- hosts: all
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: "Get Service Facts"
+    service_facts:
+  - name: "See one service"
+    debug:
+      msg: {{ ansible_facts['nodename'] }}
+  - name: "Set text in file"
+    ansible.builtin.shell: 'echo "I like Linux" > /tmp/netology.txt'
