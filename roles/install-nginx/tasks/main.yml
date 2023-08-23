@@ -1,0 +1,37 @@
+---
+# tasks file for install-nginx
+- name: Install apt package
+  apt:
+    name: nginx
+    state: latest
+  when: os_family == "Debian"
+
+- name: Install yum package
+  yum:
+    name: nginx
+    state: latest
+  when: os_family == "RedHat"
+
+- name: Wait for open 80-port
+  wait_for:
+    port: 80
+    delay: 1
+  notify:
+    - Show endpoints
+
+- name: Add Index page
+  template:
+    src: "index.html.j2"
+    dest: "/var/www/html/index.nginx-{{ distribution|lower }}.html"
+    owner: root
+    group: root
+    mode: 0755
+  notify:
+    - Reload nginx
+
+- name: Get status web resourses
+  uri:
+    url: http://{{ ip }}:80
+    method: GET
+    status_code: 200
+...

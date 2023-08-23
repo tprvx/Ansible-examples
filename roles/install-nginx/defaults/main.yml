@@ -1,0 +1,4 @@
+---
+# defaults file for nginx
+welcome: "I welcome you, dear friend, to my website created with the help of Ansible!"
+...

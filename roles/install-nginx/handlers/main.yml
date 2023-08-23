@@ -1,0 +1,12 @@
+---
+# handlers file for install-nginx
+- name: Reload nginx
+  service:
+    name: nginx
+    state: reloaded
+    enabled: yes
+
+- name: Show endpoint
+  debug:
+    msg: "http://{{ ip }}:80"
+...

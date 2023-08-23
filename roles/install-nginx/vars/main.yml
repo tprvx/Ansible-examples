@@ -1,0 +1,9 @@
+---
+# vars file for install-nginx
+distribution: "{{ ansible_distribution }}"
+os_family: "{{ ansible_os_family }}"
+cpu: "{{ ansible_processor[2] }}"
+ram: "{{ ansible_memtotal_mb }}"
+hdd: "{{ ansible_devices.vda.size }}"
+ip: "{{ ansible_all_ipv4_addresses[0] }}"
+...
