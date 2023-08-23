@@ -1,5 +1,5 @@
 # Ansible-examples
-### Install
+### Install Ansible
 + apt install ansible
 + Должен быть python 2.6+
 + ssh доступ к управляемым хостам:
@@ -7,8 +7,9 @@
   - ssh-copy-id vm1@192.168.1.101  -рассылка по хостам этого ключа
 + ansible.cfg лучше везде таскать с собой, чтобы была ожидаемая конфигурация Ansible
 
+### Install web-server
+
 ```
-# for install web-server
 ansible-playbook playbook.yaml
 ```
 
